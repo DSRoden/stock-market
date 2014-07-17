@@ -22,6 +22,7 @@
   "homepage": "https://github.com/jbrooks036/stock-market",
   "dependencies": {
     "chalk": "^0.5.1",
+    "request": "^2.37.0",
     "sync-prompt": "^0.4.1"
   },
   "devDependencies": {
