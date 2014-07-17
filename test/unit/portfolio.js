@@ -29,8 +29,22 @@ describe('Portfolio', function() {
       expect(port1.stocks[0]).to.be.instanceof(Stock);
       expect(port1.stocks[0].count).to.equal(75);
       expect(port1.stocks[1].count).to.equal(30);
-      
-      
+    });
+  });
+
+  describe('#del', function() {
+    it('should delete stock count, and delete any stock that goes below 0 from stocks array',function () {
+    var port1 = new Portfolio ('port1');
+    port1.add('appl', 75);
+    port1.add('amzn',30);
+
+    port1.del('aapl', 10);
+    port1.del('aapl', 20);
+    port1.del('amzn', 40);
+ 
+    expect(port1.stocks).to.have.length(1);
+    expect(port1.stocks[0]).to.be.instanceof(Stock);
+    expect(port1.stocks[0].count).to.equal(45);
     });
   });
 });

@@ -20,6 +20,22 @@ Portfolio.prototype.add = function(symbol, amount) {
   console.log(stock);
 };
 
+Portfolio.prototype.del = function(symbol, amount) {
+  var stock = findStock(this.stocks, symbol);
+  var spliceAt = null;
+
+  for (var i= this.stocks.length; i>= 0; i--) {
+    if(stock) {
+      stock.count -= amount;
+      }
+      if (stock.count <= 0) {
+        spliceAt = i;
+      }
+        this.stocks.splice(spliceAt, 1);
+    }
+  };
+};
+
 //Private Helper Functions //
 
 function findStock(stocks, symbol){
