@@ -8,44 +8,39 @@ function Portfolio(name) {
 }
 
 Portfolio.prototype.add = function(symbol, amount) {
-  var stock = findStock(this.stocks, symbol);
+  var index = findStock(this.stocks, symbol);
 
-  if(stock) {
-    stock.count += amount;
-  } else {
-    stock = new Stock(symbol, amount);
+  if(index >= 0) {
+    this.stocks[index].count += amount;
+  } else { 
+    var stock = new Stock(symbol, amount);
     this.stocks.push(stock);
   }
-
-  console.log(stock);
 };
 
 Portfolio.prototype.del = function(symbol, amount) {
-  var stock = findStock(this.stocks, symbol);
-  var spliceAt = null;
+  var index = findStock(this.stocks, symbol);
 
-  for (var i= this.stocks.length; i>= 0; i--) {
-    if(stock) {
-      stock.count -= amount;
-      }
-      if (stock.count <= 0) {
-        spliceAt = i;
-      }
-        this.stocks.splice(spliceAt, 1);
+  if(index >= 0){
+    this.stocks[index].count -= amount;
+
+    if(this.stocks[index].count <= 0) {
+      this.stocks.splice(index, 1);
     }
-  };
+  }
 };
+
 
 //Private Helper Functions //
 
 function findStock(stocks, symbol){
   for(var i = 0; i < stocks.length; i++) {
     if(stocks[i].symbol === symbol.toUpperCase()) {
-      return stocks[i];
+      return i;
    }
   }
 
-  return null;
+  return -1;
 }
 
 

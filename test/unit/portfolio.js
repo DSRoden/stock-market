@@ -22,29 +22,28 @@ describe('Portfolio', function() {
     it('should add stocks to portfolio', function() {
       var port1 = new Portfolio ('port1');
       port1.add('aapl', 50);
+      port1.add('amzn', 35);
       port1.add('aapl', 25);
-      port1.add('amzn', 30);
       
       expect(port1.stocks).to.have.length(2);
       expect(port1.stocks[0]).to.be.instanceof(Stock);
       expect(port1.stocks[0].count).to.equal(75);
-      expect(port1.stocks[1].count).to.equal(30);
+      expect(port1.stocks[1].count).to.equal(35);
     });
   });
 
   describe('#del', function() {
     it('should delete stock count, and delete any stock that goes below 0 from stocks array',function () {
     var port1 = new Portfolio ('port1');
-    port1.add('appl', 75);
-    port1.add('amzn',30);
+    port1.add('aapl', 50);
+    port1.add('amzn',35);
 
     port1.del('aapl', 10);
-    port1.del('aapl', 20);
     port1.del('amzn', 40);
+    port1.del('aapl', 20);
  
     expect(port1.stocks).to.have.length(1);
-    expect(port1.stocks[0]).to.be.instanceof(Stock);
-    expect(port1.stocks[0].count).to.equal(45);
+    expect(port1.stocks[0].count).to.equal(20);
     });
   });
 });
